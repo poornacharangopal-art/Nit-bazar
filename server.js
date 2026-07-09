@@ -165,7 +165,6 @@ app.get("/profile",(req,res)=>{
         college: req.session.college
     });
 });
-})
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
