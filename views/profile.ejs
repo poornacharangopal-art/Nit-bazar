@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIT Bazaar | Profile</title>
+
+    <link rel="stylesheet" href="/profile.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="profile-card">
+
+        <div class="cover"></div>
+
+        <div class="avatar-section">
+
+            <img src="https://api.dicebear.com/9.x/initials/svg?seed=<%= name %>"
+                 id="avatar">
+
+            <label class="camera">
+                📷
+                <input type="file" hidden id="upload">
+            </label>
+
+        </div>
+
+        <h1><%= name %></h1>
+
+        <p class="college">
+            <%= college || "NIT Student" %>
+        </p>
+
+        <div class="info">
+
+            <div class="row">
+                <span>Email</span>
+                <strong><%= email %></strong>
+            </div>
+
+            <div class="row">
+                <span>College</span>
+                <strong><%= college || "NIT" %></strong>
+            </div>
+
+            <div class="row">
+                <span>Member Since</span>
+                <strong>2026</strong>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <button>Edit Profile</button>
+
+            <a href="/">
+                <button class="logout">
+                    Logout
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/profile.js"></script>
+
+</body>
+</html>
