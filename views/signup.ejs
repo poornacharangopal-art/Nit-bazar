@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIT Bazaar | Sign In</title>
+
+    <link rel="stylesheet" href="/signup.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>NIT Bazaar</h1>
+
+        <h3>Welcome Back</h3>
+
+        <form action="/signin" method="POST">
+
+            <label>Username</label>
+
+            <input
+            type="text"
+            value="<%= name %>"
+            readonly>
+
+            <label>Email</label>
+
+            <input
+            type="email"
+            value="<%= email %>"
+            readonly>
+
+            <label>Password</label>
+
+            <div class="password-box">
+
+                <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password"
+                required>
+
+                <i class="fa-solid fa-eye" id="eye"></i>
+
+            </div>
+
+            <button>
+
+                Sign In
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+const eye=document.getElementById("eye");
+const password=document.getElementById("password");
+
+eye.onclick=()=>{
+
+    if(password.type==="password"){
+
+        password.type="text";
+        eye.className="fa-solid fa-eye-slash";
+
+    }
+
+    else{
+
+        password.type="password";
+        eye.className="fa-solid fa-eye";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify OTP - NIT Bazaar</title>
+    <link rel="stylesheet" href="/enterotp.css">
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="card">
+
+    <h1>OTP Verification</h1>
+
+    <p>Enter the OTP sent to your email</p>
+
+    <form action="/verify" method="POST">
+
+        <!-- email passed from server -->
+        <input type="hidden" name="email" value="<%= email %>">
+
+        <input
+            type="text"
+            name="otp"
+            id="otpInput"
+            placeholder="Enter 6-digit OTP"
+            maxlength="6"
+            required
+        >
+        
+        <button type="submit">Verify OTP</button>
+
+    </form>
+
+    <p class="note">OTP is valid for 5 minutes</p>
+    </div>
+    </body>
+</html>

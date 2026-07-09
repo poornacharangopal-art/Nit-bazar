@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", Arial, sans-serif;
+}
+
+/* NIT campus / student vibe background */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url("https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+/* dark + bluish overlay (tech + college feel) */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.75),
+        rgba(10, 25, 60, 0.65)
+    );
+
+    z-index: 0;
+}
+
+/* floating light effect */
+body::after {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 255, 200, 0.15);
+    filter: blur(120px);
+    top: 10%;
+    left: 10%;
+    z-index: 0;
+}
+
+/* main card */
+.container {
+    position: relative;
+    z-index: 1;
+
+    width: 480px;
+    padding: 45px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+
+    color: #fff;
+}
+
+/* title */
+h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+
+    background: linear-gradient(90deg, #00ffd5, #4facfe);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* description */
+p {
+    font-size: 16px;
+    margin-bottom: 35px;
+    color: #e0e0e0;
+}
+
+/* buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: bold;
+}
+
+/* login */
+#loginBtn {
+    background: #00c6ff;
+    color: black;
+    box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
+}
+
+#loginBtn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px rgba(0, 198, 255, 0.8);
+}
+
+/* signup */
+#signupBtn {
+    background: #00ff9d;
+    color: black;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.5);
+}
+
+#signupBtn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px rgba(0, 255, 157, 0.8);
+}
+
+/* mobile */
+@media (max-width: 500px) {
+    .container {
+        width: 90%;
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+}

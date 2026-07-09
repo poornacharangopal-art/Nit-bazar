@@ -1,0 +1,182 @@
+const express=require('express');
+const session=require('express-session');
+const nodemailer=require('nodemailer');
+const path=require('path');
+const { createClient } = require("redis");
+const RedisStore = require("connect-redis").default;
+const app=express();
+const transporter=nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+        user:"poornacharangopal@gmail.com", 
+        pass:"fjua anks papo jmmb"
+    }
+});
+app.set("view engine","ejs"); 
+app.use(express.static(path.join(__dirname, "public")));
+// Redis client
+const redisClient = createClient({
+    url: "redis://localhost:6379"
+});
+redisClient.connect().catch(console.error);
+
+// Session with Redis
+app.use(session({
+    store: new RedisStore({
+        client: redisClient,
+        prefix: "nitbazaar:"
+    }),
+
+    secret: "poorna126",
+    resave: false,
+    saveUninitialized: false,
+
+    cookie: {
+        maxAge: 43800 * 60 * 1000
+    }
+}));
+app.set("view-engine","ejs");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+const otpstore={};
+//send otp
+app.post("/sendotp",async(req,res)=>{
+    const email=req.body.email;
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    otpstore[email]={
+        otp:otp,
+        expiry:Date.now()+5*60*1000
+    }
+    await transporter.sendMail({
+        from:"poornacharangopal@gmail.com",
+        to:email,
+        subject:"One Time password to login in NIT Bazaar",
+        text:`Hello,
+
+Your OTP is: ${otp}
+
+This OTP is valid for 5 minutes.
+Do not share this OTP with anyone.
+
+Regards,
+The Team NIT Bazaar`
+    });
+    res.render("EnterOTP",{
+        email:email
+    });
+})
+//verify otp
+app.post("/verify",(req,res)=>{
+    const email=req.body.email;
+    const enteredotp=req.body.otp;
+    const otp=otpstore[email].otp;
+    const expiry=otpstore[email].expiry;
+    if(expiry<Date.now()){
+        res.render("ResendOtp",{
+            email:email
+        });
+    }
+    else{
+    if(enteredotp==otp){
+        res.status(302);
+        res.redirect(`/loginpage?email=${email}`);
+    }
+    else{
+        res.status(302);
+        res.redirect("/otp");
+    }
+}
+})
+//login page
+app.post('/login',(req,res)=>{
+    const username=req.body.name;
+    const email=req.body.email;
+    const college=req.body.college;
+    const password=req.body.password;
+    req.session.user=username;
+    req.session.email=email;
+    req.session.password=password;
+    req.session.college=college;
+    res.render("loggedin",{
+        name:username
+    });
+})
+//Dashboard
+app.get('/dashboard',(req,res)=>{
+    const username=req.session.user;
+    if(!username){
+        res.status(302);
+        return res.redirect("/loginpage");
+    }
+    res.render("Dashboard",{
+        name:username
+    });
+})
+//Home
+app.get('/',(req,res)=>{
+    res.render("Home");
+})
+//loginpage
+app.get('/loginpage',(req,res)=>{
+    const email=req.query.email;
+    res.render("login1",{
+        email:email
+    });
+})
+//signuppage
+app.get('/signuppage',(req,res)=>{
+    const username=req.session.user;
+    const email=req.session.email;
+    if(username){
+        return res.render("Dashboard",{
+            name:username
+        });
+    }
+    else{
+        alert("Not Logged in yet");
+        res.status(302);
+        res.redirect("/otp");
+    }
+})
+//otp
+app.get("/otp",(req,res)=>{
+    res.set("content-type","text/html")
+    res.render("otp");
+})
+app.get("/signup",(req,res)=>{
+    if(req.session.user){
+        res.render("signup",{
+            name:req.session.user,
+            email:req.session.email,
+        })
+    }
+    else{
+        res.redirect("/loginpage");
+    }
+})
+app.post("/signin",(req,res)=>{
+
+    const enteredPassword=req.body.password;
+
+    if(enteredPassword===req.session.password){
+
+        res.redirect("/dashboard");
+
+    }
+
+    else{
+
+        res.send("Incorrect Password");
+
+    }
+
+});
+app.get("/profile",(req,res)=>{
+    res.render()
+})
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});
+

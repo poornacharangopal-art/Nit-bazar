@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - NIT Bazaar</title>
+
+    <link rel="stylesheet" href="/dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <span>🛒 NIT Bazaar</span>
+        </div>
+
+        <nav>
+            <a href="/dashboard">Home</a>
+            <a href="/products">View Products</a>
+            <a href="/addproduct">Add Product</a>
+            <a href="/profile">Profile</a>
+            <a href="/logout" class="logout">Logout</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="card">
+            <h1>Welcome, <%= name %> 👋</h1>
+            <p>Explore, buy, and sell notes & products easily on NIT Bazaar.</p>
+        </div>
+    </div>
+
+</body>
+</html>
