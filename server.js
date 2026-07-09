@@ -7,19 +7,18 @@ const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
+    pool: true,
     auth: {
-        user: "poornacharangopal@gmail.com",
-        pass: "fjua anks papo jmmb"
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD
     },
-    connectionTimeout: 30000,
-    greetingTimeout: 30000,
-    socketTimeout: 30000
+    tls: {
+        rejectUnauthorized: false
+    }
 });
 app.set("view engine","ejs"); 
 app.use(express.static(path.join(__dirname, "public")));
-// Redis client
 
-// Session with Redis
 app.use(session({
     secret: "poorna126",
     resave: false,
