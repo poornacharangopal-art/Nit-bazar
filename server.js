@@ -4,16 +4,10 @@ const nodemailer=require('nodemailer');
 const path=require('path');
 const app=express();
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    pool: true,
+    service: "gmail",
     auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD
-    },
-    tls: {
-        rejectUnauthorized: false
     }
 });
 app.set("view engine","ejs"); 
