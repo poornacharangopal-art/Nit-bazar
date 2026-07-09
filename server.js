@@ -2,8 +2,6 @@ const express=require('express');
 const session=require('express-session');
 const nodemailer=require('nodemailer');
 const path=require('path');
-const { createClient } = require("redis");
-const RedisStore = require("connect-redis").default;
 const app=express();
 const transporter=nodemailer.createTransport({
     service:"gmail",
@@ -12,21 +10,12 @@ const transporter=nodemailer.createTransport({
         pass:"fjua anks papo jmmb"
     }
 });
-app.set("view engine","ejs"); 
+app.set("view-engine","ejs"); 
 app.use(express.static(path.join(__dirname, "public")));
 // Redis client
-const redisClient = createClient({
-    url: "redis://localhost:6379"
-});
-redisClient.connect().catch(console.error);
 
 // Session with Redis
 app.use(session({
-    store: new RedisStore({
-        client: redisClient,
-        prefix: "nitbazaar:"
-    }),
-
     secret: "poorna126",
     resave: false,
     saveUninitialized: false,
