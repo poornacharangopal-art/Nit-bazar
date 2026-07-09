@@ -29,6 +29,7 @@ app.use(express.json());
 const otpstore={};
 //send otp
 app.post("/sendotp",async(req,res)=>{
+    try{
     const email=req.body.email;
     const otp = Math.floor(100000 + Math.random() * 900000);
     otpstore[email]={
@@ -52,6 +53,10 @@ The Team NIT Bazaar`
     res.render("EnterOTP",{
         email:email
     });
+    }catch(err) {
+        console.error("SEND OTP ERROR:", err);
+        res.status(500).send(err.message);
+    }
 })
 //verify otp
 app.post("/verify",(req,res)=>{
