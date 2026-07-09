@@ -1,14 +1,21 @@
 {
   "name": "nit-bazaar",
   "version": "1.0.0",
-  "description": "",
+  "description": "NIT Bazaar web application",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "dependencies": {
+    "connect-redis": "^9.0.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "nodemailer": "^7.0.5",
+    "redis": "^5.8.2"
+  }
 }
