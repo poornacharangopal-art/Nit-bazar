@@ -161,7 +161,13 @@ app.post("/signin",(req,res)=>{
 
 });
 app.get("/profile",(req,res)=>{
-    res.render()
+   app.get("/profile", (req, res) => {
+    res.render("profile", {
+        name: req.session.user,
+        email: req.session.email,
+        college: req.session.college
+    });
+});
 })
 const PORT = process.env.PORT || 3000;
 
