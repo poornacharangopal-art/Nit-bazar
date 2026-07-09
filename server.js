@@ -3,11 +3,20 @@ const session=require('express-session');
 const nodemailer=require('nodemailer');
 const path=require('path');
 const app=express();
+console.log("EMAIL:", process.env.EMAIL);
+console.log("PASSWORD EXISTS:", !!process.env.EMAIL_PASSWORD);
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD
+    }
+});
+transporter.verify((err, success) => {
+    if (err) {
+        console.error("SMTP VERIFY ERROR:", err);
+    } else {
+        console.log("SMTP READY");
     }
 });
 app.set("view engine","ejs"); 
