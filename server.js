@@ -8,8 +8,8 @@ console.log("PASSWORD EXISTS:", !!process.env.EMAIL_PASSWORD);
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD
+        user: "poornacharangopal@gmail.com",
+        pass: "fjua anks papo jmmb"
     }
 });
 transporter.verify((err, success) => {
