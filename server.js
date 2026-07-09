@@ -10,7 +10,7 @@ const transporter=nodemailer.createTransport({
         pass:"fjua anks papo jmmb"
     }
 });
-app.set("view-engine","ejs"); 
+app.set("view engine","ejs"); 
 app.use(express.static(path.join(__dirname, "public")));
 // Redis client
 
@@ -24,7 +24,6 @@ app.use(session({
         maxAge: 43800 * 60 * 1000
     }
 }));
-app.set("view-engine","ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const otpstore={};
