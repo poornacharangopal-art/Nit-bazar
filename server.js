@@ -120,8 +120,7 @@ app.get('/signuppage',(req,res)=>{
             name:username
         });
     }
-    else{
-        alert("Not Logged in yet");
+    else {
         res.status(302);
         res.redirect("/otp");
     }
@@ -160,7 +159,6 @@ app.post("/signin",(req,res)=>{
 
 });
 app.get("/profile",(req,res)=>{
-   app.get("/profile", (req, res) => {
     res.render("profile", {
         name: req.session.user,
         email: req.session.email,
