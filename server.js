@@ -2,6 +2,7 @@ const express=require('express');
 const session=require('express-session');
 const nodemailer=require('nodemailer');
 const path=require('path');
+const Products=require('Products');
 const app=express();
 console.log("EMAIL:", process.env.EMAIL);
 console.log("PASSWORD EXISTS:", !!process.env.EMAIL_PASSWORD);
@@ -181,7 +182,8 @@ app.get("/addproduct",(req,res)=>{
     res.render("AddProduct");
 }
 app.post("/addproductdetails",(req,res)=>{
-    const {productname,cost,image}=req.body;
+    const {ProductName,Cost,SellerNmae,ImageUrl}=req.body;
+    const
     
 const PORT = process.env.PORT || 3000;
 
