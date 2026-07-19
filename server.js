@@ -107,7 +107,7 @@ app.post('/login',async(req,res)=>{
     });
     await user.save();
     req.session.email=email;
-    req.session.userid=userid;
+    req.session.user=username;
     res.render("loggedin",{
         name:username
     });
@@ -168,7 +168,7 @@ app.post("/signin",async(req,res)=>{
 
     const enteredPassword=req.body.password;
     const email=req.body.email;
-    const user=await User.findOne({UserEmail:email});
+    const user=await User.findOne({EmailId:email});
     const password=user.Password;
     
     if(enteredPassword===password){
@@ -184,30 +184,36 @@ app.post("/signin",async(req,res)=>{
     }
 
 });
-app.get("/profile",(req,res)=>{
+app.get("/profile",async(req,res)=>{
+    const user=await User.findOne({EmailId:req.session.email});
     res.render("profile", {
-        name: req.session.user,
-        email: req.session.email,
-        college: req.session.college
+        name:user.UserName,
+        email:user.EmailId,
+        college:user.College,
     });
 });
-app.get("/addproduct"(req,res)=>{
+app.get("/addproduct",(req,res)=>{
     res.render("addproduct");
 });
 app.post("/addproducttodb",async(req,res)=>{
-    const Name=req.body.Name;
-    const ImageUrl=req.body.image;
-    const Cost=req.body.cost;
+    const name=req.body.productName;
+    const imageUrl=req.body.image;
+    const cost=req.body.cost;
     const UserEmail=req.session.email;
+    const user=await User.findOne({EmailId:UserEmail});
+    if(!user){
+        return res.send("User not found");
     const product=new Products({
-        Name,
-        ImageUrl,
-        Cost,
-        UserEmail,
+        Name:name,
+        ImageUrl:imageUrl,
+        UserEmail:user.EmailId,
+        Cost:cost,
+        UserName:user.UserName,
+        College:user.College
     });
     await product.save();
-    res.render("productadded",product);
-});         
+    res.render("productadded",{product});
+});  
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
