@@ -8,6 +8,10 @@ const ProductsSchema=new mongoose.Schema({
     type:string,
     required:name
   },
+  Cost{
+    type:string,
+    required:true
+  },
   UserName:{
     type:string,
     required:true
