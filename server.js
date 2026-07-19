@@ -2,7 +2,7 @@ const express=require('express');
 const session=require('express-session');
 const nodemailer=require('nodemailer');
 const User=require("./User");
-const connectdb=require('./connectdb');
+const connectDB=require('./connectDB');
 const path=require('path');
 const app=express();
 console.log("EMAIL:", process.env.EMAIL);
