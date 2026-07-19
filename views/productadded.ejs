@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Added</title>
+    <link rel="stylesheet" href="/productadded.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <h1>Product Added Successfully</h1>
+
+    <div class="product-card">
+
+        <div class="row">
+            <span class="label">Product Name</span>
+            <span class="value"><%= product.Name %></span>
+        </div>
+
+        <div class="row">
+            <span class="label">Cost</span>
+            <span class="value">₹ <%= product.Cost %></span>
+        </div>
+
+        <div class="row">
+            <span class="label">Added By</span>
+            <span class="value"><%= product.UserName %></span>
+        </div>
+
+        <div class="row">
+            <span class="label">Email</span>
+            <span class="value"><%= product.UserEmail %></span>
+        </div>
+
+        <div class="row">
+            <span class="label">College</span>
+            <span class="value"><%= product.College %></span>
+        </div>
+
+    </div>
+
+    <div class="buttons">
+        <a href="/dashboard" class="btn">Dashboard</a>
+        <a href="/addproduct" class="btn">Add Another Product</a>
+    </div>
+
+</div>
+
+</body>
+</html>
