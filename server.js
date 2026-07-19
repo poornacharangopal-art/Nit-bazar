@@ -193,7 +193,20 @@ app.get("/profile",(req,res)=>{
 app.get("/addproduct"(req,res)=>{
     res.render("addproduct");
 });
-
+app.post("/addproducttodb",async(req,res)=>{
+    const Name=req.body.Name;
+    const ImageUrl=req.body.image;
+    const Cost=req.body.cost;
+    const UserEmail=req.session.email;
+    const product=new Products({
+        Name,
+        ImageUrl,
+        Cost,
+        UserEmail,
+    });
+    await product.save();
+    res.render("productadded",product);
+});         
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
