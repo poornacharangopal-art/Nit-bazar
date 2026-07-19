@@ -4,6 +4,10 @@ const ProductsSchema=new mongoose.Schema({
     type:string,
     required:true
   },
+  ImageUrl{
+    type:string,
+    required:true
+  },
   UserEmail:{
     type:string,
     required:name
