@@ -178,13 +178,6 @@ app.get("/profile",(req,res)=>{
         college: req.session.college
     });
 });
-app.get("/addproduct",(req,res)=>{
-    res.render("AddProduct");
-}
-app.post("/addproductdetails",(req,res)=>{
-    const {ProductName,Cost,SellerNmae,ImageUrl}=req.body;
-    const
-    
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
