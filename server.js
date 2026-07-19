@@ -156,7 +156,7 @@ app.get("/otp",(req,res)=>{
 app.get("/signup",(req,res)=>{
     if(req.session.user){
         res.render("signup",{
-            id:req.session.userid,
+            id:req.session.user,
             email:req.session.email,
         })
     }
@@ -203,6 +203,7 @@ app.post("/addproducttodb",async(req,res)=>{
     const user=await User.findOne({EmailId:UserEmail});
     if(!user){
         return res.send("User not found");
+    }
     const product=new Products({
         Name:name,
         ImageUrl:imageUrl,
@@ -213,7 +214,16 @@ app.post("/addproducttodb",async(req,res)=>{
     });
     await product.save();
     res.render("productadded",{product});
-});  
+});
+app.get("/products",async(req,res)=>{
+    const email=req.session.email;
+    const user=await User.findOne({EmailId:email});
+    if(!user){
+        return res.send("No user found");
+    }
+    const products=await Product.find({College:user.College});
+    res.render("displayproducts",{products});
+});
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
