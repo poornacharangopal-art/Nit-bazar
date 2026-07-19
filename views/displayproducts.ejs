@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+
+    <link rel="stylesheet" href="/displayproducts.css">
+</head>
+<body>
+
+<h1 class="heading">Available Products</h1>
+
+<div id="productsContainer"></div>
+
+<script>
+const products=<%-JSON.Stringify(products)%>
+const container=document.getElementByID("productsContainer");
+products.forEach(product=>{
+const card=document.createElement("div");
+card.className=card;
+const image=document.createElement("img");
+img.src=products.ImageUrl;
+const name=doument.createElement("h2");
+name.textContent=products.Name;
+const cost=document.createElement("p");
+cost.innerHTML="<strong>Price:</strong>"+product.Cost;
+const seller=document.createElement("p");
+seller.innerHtml="<strong>SellerName:</strong>"+product.UserName;
+const Email=document.createElement("p");
+Email.innerHtml="<strong>SellerEmail:</strong>"+product.UserEmail; 
+const college=document.createElement("p");
+college.innerHTML="<strong>College:</strong>"+product.College;
+card.appendChild(image);
+card.appendChild(name);
+card.appendChild(cost);
+card.appendChild(seller);
+card.appendChild(Email);
+card.appendChild(college);
+container.appendChild(card);
+});
+</script>
+
+</body>
+</html>
