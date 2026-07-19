@@ -5,6 +5,7 @@ const User=require("./User");
 const connectDB=require('./connectDB');
 const path=require('path');
 const app=express();
+connectDB();
 console.log("EMAIL:", process.env.EMAIL);
 console.log("PASSWORD EXISTS:", !!process.env.EMAIL_PASSWORD);
 const transporter = nodemailer.createTransport({
