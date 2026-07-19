@@ -3,6 +3,7 @@ const session=require('express-session');
 const nodemailer=require('nodemailer');
 const User=require("./User");
 const connectDB=require('./connectDB');
+const Products=require('./Products');
 const path=require('path');
 const app=express();
 connectDB();
