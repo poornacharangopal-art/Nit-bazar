@@ -2,7 +2,6 @@ const express=require('express');
 const session=require('express-session');
 const nodemailer=require('nodemailer');
 const path=require('path');
-const Products=require('Products');
 const app=express();
 console.log("EMAIL:", process.env.EMAIL);
 console.log("PASSWORD EXISTS:", !!process.env.EMAIL_PASSWORD);
