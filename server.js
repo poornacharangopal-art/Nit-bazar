@@ -1,6 +1,7 @@
 const express=require('express');
 const session=require('express-session');
 const nodemailer=require('nodemailer');
+const User=require("./models/User");
 const path=require('path');
 const app=express();
 console.log("EMAIL:", process.env.EMAIL);
@@ -88,15 +89,22 @@ app.post("/verify",(req,res)=>{
 }
 })
 //login page
-app.post('/login',(req,res)=>{
+app.post('/login',async(req,res)=>{
+    const userid=req.body.name;
     const username=req.body.name;
     const email=req.body.email;
     const college=req.body.college;
     const password=req.body.password;
-    req.session.user=username;
+    const user=new User({
+        UserEmail:email,
+        UserId:userid,
+        UserName:username,
+        College:college,
+        Password:password
+    });
+    await user.save();
     req.session.email=email;
-    req.session.password=password;
-    req.session.college=college;
+    req.session.userid=userid;
     res.render("loggedin",{
         name:username
     });
@@ -145,7 +153,7 @@ app.get("/otp",(req,res)=>{
 app.get("/signup",(req,res)=>{
     if(req.session.user){
         res.render("signup",{
-            name:req.session.user,
+            id:req.session.userid,
             email:req.session.email,
         })
     }
@@ -153,11 +161,14 @@ app.get("/signup",(req,res)=>{
         res.redirect("/loginpage");
     }
 })
-app.post("/signin",(req,res)=>{
+app.post("/signin",async(req,res)=>{
 
     const enteredPassword=req.body.password;
-
-    if(enteredPassword===req.session.password){
+    const email=req.body.email;
+    const user=await User.findOne({UserEmail:email});
+    const password=user.Password;
+    
+    if(enteredPassword===password){
 
         res.redirect("/dashboard");
 
